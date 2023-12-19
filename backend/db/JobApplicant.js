@@ -25,7 +25,7 @@ let schema = new mongoose.Schema(
         },
         endYear: {
           type: Number,
-          max: new Date().getFullYear(),
+          max: 2100,
           validate: [
             { validator: Number.isInteger, msg: "Year should be an integer" },
             {
@@ -33,6 +33,12 @@ let schema = new mongoose.Schema(
                 return this.startYear <= value;
               },
               msg: "End year should be greater than or equal to Start year",
+            },
+            {
+              validator: function (value) {
+                return (this.startYear + 10) >= value;
+              },
+              msg: "Your degree must end within 10 year of your degree start date.",
             },
           ],
         },

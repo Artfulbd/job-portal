@@ -466,7 +466,7 @@ const Login = (props) => {
             </Grid>
             <Grid item>
               <PhoneInput
-                country={"in"}
+                country={"ca"}
                 value={phone}
                 onChange={(phone) => setPhone(phone)}
               />

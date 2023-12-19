@@ -1,0 +1,61 @@
+version: "3.8"
+
+# services:
+#   mongodb:
+#     image: "mongo"
+#     volumes:
+#       - data:/data/db
+
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "4444:4444"
+#     volumes:
+#       - logs:/app/logs
+#       - ./backend:/app
+#       - /app/node_modules
+#     depends_on:
+#       - mongodb
+      
+#   frontend:
+#     build: ./frontend
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - ./frontend/src:/app/src
+#     stdin_open: true
+#     tty: true
+#     depends_on:
+#       - backend
+
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+
+  backend:
+    image: "artfulbd/job-portal-backend:v1.0"  # Specify the Docker Hub image
+    ports:
+      - "4444:4444"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+
+  frontend:
+    image: "artfulbd/job-portal-frontend:v1.0"  # Specify the Docker Hub image
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+volumes:
+  data:
+  logs:
